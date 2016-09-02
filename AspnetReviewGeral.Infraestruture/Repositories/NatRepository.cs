@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AspnetReviewGeral.Domain;
 using AspnetReviewGeral.Infraestruture.Repositories.Interfaces;
 
@@ -30,7 +26,7 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
             }
         }
 
-        public async void RemoveRange(IEnumerable<Nat> nats)
+        public async void RemoveRange(IList<Nat> nats)
         {
             if (base.RemoveRange(nats))
             {

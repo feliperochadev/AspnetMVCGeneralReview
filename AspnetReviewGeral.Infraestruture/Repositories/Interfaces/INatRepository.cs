@@ -8,6 +8,6 @@ namespace AspnetReviewGeral.Infraestruture.Repositories.Interfaces
         void Add(Nat nat);
         void Update(Nat nat);
         void Remove(int natId);
-        void RemoveRange(IEnumerable<Nat> nats);
+        void RemoveRange(IList<Nat> nats);
     }
 }

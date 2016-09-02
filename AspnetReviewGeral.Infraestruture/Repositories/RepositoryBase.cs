@@ -60,7 +60,7 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
             return true;
         }
 
-        public bool RemoveRange(IEnumerable<TEntity> objs)
+        public virtual bool RemoveRange(IEnumerable<TEntity> objs)
         {
             var enumerable = objs as IList<TEntity> ?? objs.ToList();
             if (!enumerable.Any()) return false;
@@ -71,13 +71,13 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
         public void SaveChanges()
         {
             natterEFContext.SaveChanges();
-            natterEFContext.Dispose();
+            Dispose();
         }
 
         public async Task SaveChangesAsync()
         {
             await natterEFContext.SaveChangesAsync();
-            natterEFContext.Dispose();
+            Dispose();
         }
 
         public void Dispose()

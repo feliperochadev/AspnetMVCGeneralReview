@@ -26,7 +26,7 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
             }
         }
 
-        public async void RemoveRange(IEnumerable<User> users)
+        public async void RemoveRange(IList<User> users)
         {
             if (base.RemoveRange(users))
             {

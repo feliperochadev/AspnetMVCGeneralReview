@@ -8,7 +8,7 @@ namespace AspnetReviewGeral.Infraestruture.Repositories.Interfaces
         void Add(User user);
         void Update(User user);
         void Remove(int userId);
-        void RemoveRange(IEnumerable<User> users);
+        void RemoveRange(IList<User> users);
 
     }
 }
