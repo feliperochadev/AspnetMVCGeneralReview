@@ -1,4 +1,5 @@
-﻿using AspnetReviewGeral.Domain;
+﻿using System.Collections.Generic;
+using AspnetReviewGeral.Domain;
 using AspnetReviewGeral.Infraestruture.Repositories.Interfaces;
 
 namespace AspnetReviewGeral.Infraestruture.Repositories
@@ -20,6 +21,14 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
         public async void Remove(int userId)
         {
             if (base.Remove(userId))
+            {
+                await SaveChangesAsync();
+            }
+        }
+
+        public async void RemoveRange(IEnumerable<User> users)
+        {
+            if (base.RemoveRange(users))
             {
                 await SaveChangesAsync();
             }

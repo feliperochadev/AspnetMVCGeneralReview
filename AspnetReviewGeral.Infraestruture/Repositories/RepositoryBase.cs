@@ -17,7 +17,7 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
             return natterEFContext.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> GetAllAsNoTracking()
+        public IQueryable<TEntity> GetAllAsReadOnly()
         {
             return natterEFContext.Set<TEntity>().AsNoTracking();
         }
@@ -27,9 +27,9 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
             return GetAll().Where(predicate).AsQueryable();
         }
 
-        public IQueryable<TEntity> GetWithConditionAsNoTracking(Func<TEntity, bool> predicate)
+        public IQueryable<TEntity> GetWithConditionAsReadOnly(Func<TEntity, bool> predicate)
         {
-            return GetAllAsNoTracking().Where(predicate).AsQueryable();
+            return GetAllAsReadOnly().Where(predicate).AsQueryable();
         }
 
         public TEntity Find(params object[] key)
@@ -55,17 +55,17 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
         public virtual bool Remove(params object[] key)
         {
             var obj = natterEFContext.Set<TEntity>().Find(key);
-            if (obj != null)
-            {
-                natterEFContext.Set<TEntity>().Remove(obj);
-                return true;
-            }
-            return false;
+            if (obj == null) return false;
+            natterEFContext.Set<TEntity>().Remove(obj);
+            return true;
         }
 
-        public void RemoveRange(IEnumerable<TEntity> objs)
+        public bool RemoveRange(IEnumerable<TEntity> objs)
         {
-            natterEFContext.Set<TEntity>().RemoveRange(objs);
+            var enumerable = objs as IList<TEntity> ?? objs.ToList();
+            if (!enumerable.Any()) return false;
+            natterEFContext.Set<TEntity>().RemoveRange(enumerable);
+            return true;
         }
 
         public void SaveChanges()

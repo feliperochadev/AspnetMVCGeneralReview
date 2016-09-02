@@ -29,5 +29,13 @@ namespace AspnetReviewGeral.Infraestruture.Repositories
                 await SaveChangesAsync();
             }
         }
+
+        public async void RemoveRange(IEnumerable<Nat> nats)
+        {
+            if (base.RemoveRange(nats))
+            {
+                await SaveChangesAsync();
+            }
+        }
     }
 }
